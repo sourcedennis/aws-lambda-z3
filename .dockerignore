@@ -1,6 +1,6 @@
 target/
 Dockerfile
-.DS_Store/
+.DS_Store
 .git/
 .gitignore
 .dockerignore

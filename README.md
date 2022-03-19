@@ -79,3 +79,7 @@ While setting this up, I ran into several HTTP errors:
 
 * `403` -- Forbidden. This likely occurs when you've sent the request *to the wrong URL*.
 * `500`/`502` -- Internal Server Error. This happens when the program crashes. Possibly because the JSON string does not contain the `val` field. Alternatively, make sure *Lambda Proxy Integration* is disabled (and then redeploy); As it seemingly modifies the input JSON message.
+
+## License
+
+BSD-3 -- See the `LICENSE` file
