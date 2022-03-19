@@ -4,12 +4,12 @@ A *Tutorial* on setting up the [Z3 theorem prover](https://github.com/Z3Prover/z
 
 This Rust project is merely a *proof-of-concept*. It performs:
 
-* Take a HTTP POST request with a value in JSON (formatted as `{"val": 42}`).
+* Take a HTTP POST request with a value, in JSON (formatted as `{"val": 42}`).
 * Invokes Z3 to find two non-zero positive integers `x` and `y` (which are less than `val`), which sum to `val`.
   * That is, `x > 0`, `y > 0`, `x < val`, `y < val`, `x + y = val`
-* In the HTTP response, it returns those values as JSON. (formatted as `{"x":6,"y":36}`).
+* In the HTTP response, it returns those values, as JSON. (formatted as `{"x":6,"y":36}`).
 
-Note that Z3 is an *external* dependency of our program, which needs to be shipped along. To accomplish that, we pack everything into a Docker image, which we push to AWS.
+Note that Z3 is a *dynamically linked* dependency of our program, which needs to be shipped along. To accomplish that, we pack everything into a Docker image, which we push to AWS.
 
 The contents of both `src/main.rs` and `Dockerfile` are documented. The remainder of this README elaborates on getting the project into Lambda.
 
@@ -53,7 +53,7 @@ AWS offers Lambda Proxy Integration, which seemingly interferes with our program
 * **Uncheck** the box for **Use Lambda Proxy Integration**
 * **Important!** Click `Actions > Deploy API` and redeploy to the default stage
 
-Now the program should be publicly accessible through an URL -- as listed in Lambda's trigger information. This URL looks like:
+Now the program should be publicly accessible through an URL - as listed in Lambda's trigger information. This URL looks like:
 ```
 https://*.execute-api.*.amazonaws.com/default/aws-lambda-z3
 ```
@@ -77,9 +77,9 @@ Well done! Now you have Z3 running inside Lambda.
 
 While setting this up, I ran into several HTTP errors:
 
-* `403` -- Forbidden. This likely occurs when you've sent the request *to the wrong URL*.
-* `500`/`502` -- Internal Server Error. This happens when the program crashes. Possibly because the JSON string does not contain the `val` field. Alternatively, make sure *Lambda Proxy Integration* is disabled (and then redeploy); As it seemingly modifies the input JSON message.
+* `403` - Forbidden. This likely occurs when you've sent the request *to the wrong URL*.
+* `500`/`502` - Internal Server Error. This happens when the program crashes. Possibly because the JSON string does not contain the `val` field. Alternatively, make sure *Lambda Proxy Integration* is disabled (and then redeploy); As it seemingly modifies the input JSON message.
 
 ## License
 
-BSD-3 -- See the `LICENSE` file
+BSD-3 - See the `LICENSE` file
