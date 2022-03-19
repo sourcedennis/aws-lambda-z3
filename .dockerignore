@@ -1,0 +1,6 @@
+target/
+Dockerfile
+.DS_Store/
+.git/
+.gitignore
+.dockerignore
