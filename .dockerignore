@@ -1,6 +1,5 @@
-target/
-Dockerfile
-.DS_Store
-.git/
-.gitignore
-.dockerignore
+# Ignore everything except for the Rust-specific things
+*
+!src/
+!Cargo.lock
+!Cargo.toml
